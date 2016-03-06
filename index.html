@@ -133,85 +133,64 @@
 
           <p><span style="color: #6E6E6E">The result:</span> &nbsp;<i>Room level accuracy</i></p>
         </section>
-        <!--
-				<section>
 
-					<h4>In a smart home / hospital / office, how do we act when..</h4>
+        <section>
 
-					<br>
-					<p class="fragment" data-fragment-index="0">We do not know where users are;</p>
+          <img src="img/Bluetooth_Smart_Logo.svg" style="width: 400px;">
 
-					<p class="fragment" data-fragment-index="0">or locations of devices are unknown?</p>
+          <p>Devices are often connected wirelessly</p>
+          <p>In our case: Bluetooth Low Energy (BLE)</p>
 
-					<br>
+          <br>
+          <p class="fragment" data-fragment-index="1"><b>&rarr;</b> <em>Received Signal Strength Indicator (RSSI)</em></p>
+        </section>
 
-					<h3 class="fragment" data-fragment-index="0">&rarr; <b>Location is key</b> &larr;</h3>
+        <section data-state="chart-rssi">
+          <section>
+            <h4>Measured RSSI</h4>
+            <small>Beacon at fixed distances to the receiver with clear line of sight</small>
+            <canvas id="chart-rssi-multi" height="500" width="960" class="chart-canvas"></canvas>
+            <div id="chart-rssi-multi-legend" class="chart-legend"></div>
+          </section>
+          <section><img src="img/rssi_example.png" style="border: 0; box-shadow: none;margin-bottom: 0;"></section>
+        </section>
 
-				</section>
+        <section data-state="">
+          <h3>Log-distance path loss model:</h3><br>
 
-				<section>
-					<h2>Problem statement</h2>
-					<br>
-					<p>Given an <em>unknown</em> building with (smart) devices, can we autonomoumsly locate these devices and the users that walk around inside the building?</p>
-					<br>
-					<div style="color: #6E6E6E" class="fragment">
-						No prior configuration or hardware
-						<br>
-						Dynamic environments
-						<br>
-						Privacy
-						<br>
-						Real time
-					</div>
-				</section>
+          $$RSSI = -10n \log_{10}(\frac{d}{d_{0}}) + A$$
 
-				<section>
-
-					<h3>General idea</h3>
-					<img src="img/floorplan_projectoverview.png">
-
-				</section>
-
-				<section>
-
-					<img src="img/Bluetooth_Smart_Logo.svg" style="width: 400px;">
-
-					<p>In the &lsquo;Internet of Things&rsquo; devices are connected wirelessly</p>
-					<p>In our case: Bluetooth Low Energy (BLE)</p>
-
-					<br>
-					<p class="fragment" data-fragment-index="1"><b>&rarr;</b> <em>Received Signal Strength Indicator (RSSI)</em></p>
-				</section>
-
-				<section data-state="chart-rssi">
-					<section>
-						<h4>Measured RSSI</h4>
-						<small>Beacon at fixed distances to the receiver with clear line of sight</small>
-						<canvas id="chart-rssi-multi" height="500" width="960" class="chart-canvas"></canvas>
-						<div id="chart-rssi-multi-legend" class="chart-legend"></div>
-					</section>
-					<section><img src="img/rssi_example.png" style="border: 0; box-shadow: none;margin-bottom: 0;"></section>
-				</section>
-
-				<section data-state="">
-					<h3>Log-distance path loss model:</h3><br>
-
-					$$RSSI = -10n \log_{10}(\frac{d}{d_{0}}) + A$$
-
-					<br><br>
-					<ul>
-						<li>$d$ the distance to the device</li>
-						<li>$A$ signal strength at $d_0$</li>
-						<li>$n$ an evironment constant</li>
-					</ul>
-				</section>
-
-				<section data-state="chart-dist">
+          <br><br>
+          <ul>
+            <li>$d$ the distance to the device</li>
+            <li>$A$ signal strength at $d_0$</li>
+            <li>$n$ an evironment constant</li>
+          </ul>
+        </section>
+        <section data-state="chart-dist">
 					<h4>Estimated distance</h4>
 					<small>Beacon at fixed distances to the receiver with clear line of sight</small>
 					<canvas id="chart-dist-spike" height="500" width="960"></canvas>
 					<div id="chart-dist-spike-legend" class="chart-legend"></div>
 				</section>
+
+        <section>
+          <h3>Is RSSI usefull?</h3>
+
+          <div class="column-left">
+            <ul>
+              <li>Very noisy</li>
+              <li>Influenced by walls, humans, objects</li>
+            </ul>
+          </div>
+          <div class="column-right">
+            <ul>
+              <li>Avaiable in consumer devices</li>
+              <li>Free input</li>
+              <li>Filtering helps (a bit)</li>
+            </ul>
+          </div>
+        </section>
 
 				<section>
 					<section data-state="chart-kalman">
@@ -247,30 +226,30 @@
 					</section>
 				</section>
 
-				<section>
+        <section>
 
-					<h3>RSSI is not enough..</h3>
+          <h3>RSSI is not enough..</h3>
 
-					<p>RSSI gives us distance, but distance needs a <em>where</em></p>
+          <p>RSSI gives us distance, but distance needs a <em>where</em></p>
+          <br>
+          <div class="fragment" data-fragment-index="1">
+            <p>Users can provide this</p>
+            <div class="column-left" style="width: 70%">
+              <br>
+              <dl>
+                <dt>Accelerometer</dt>
+                <dd>Physical acceleration in $x, y, z$</dd>
+                <dt>Compass</dt>
+                <dd>Heading relative to global north</dd>
+              </dl>
+            </div>
 
-					<div class="fragment" data-fragment-index="1">
-						<div class="column-left" style="width: 70%">
-							<br>
-							<dl>
-								<dt>Accelerometer</dt>
-								<dd>Physical acceleration in $x, y, z$</dd>
-								<dt>Compass</dt>
-								<dd>Heading relative to global north</dd>
-							</dl>
-						</div>
-
-						<div class="column-right" style="width: 30%">
-							<img src="img/device_axes.jpg">
-						</div>
-					</div>
-				</section>
-
-				<section>
+            <div class="column-right" style="width: 30%">
+              <img src="img/device_axes.jpg">
+            </div>
+          </div>
+        </section>
+        <section>
 					<h3>Lets talk about robots..</h3>
 					<p><b>Simulteneous Localisation and Mapping (SLAM)</b></p>
 
@@ -279,17 +258,22 @@
 					<br>
 					<img class="fragment" src="img/robottohuman.png">
 				</section>
+        <section>
+          <h3>Replacing robots with humans</h3>
+          <p>Robot &rarr; Human</p>
+          <br>
+          <p class="fragment" data-fragment-index="0">Control &rarr; Motion estimates</p>
+          <p class="fragment" data-fragment-index="0">Landmark &rarr; Device</p>
+          <br>
+          <p class="fragment" data-fragment-index="1">2D Sensor readings &rarr; (1D) RSSI + initalisation phase</p>
+          <p class="fragment" data-fragment-index="1">Focus on robot's path &rarr; Focus on device locations</p>
+        </section>
+        <!--
 
-				<section>
-					<h3>Replacing robots with humans</h3>
-					<p>Robot &rarr; Human</p>
-					<br>
-					<p class="fragment" data-fragment-index="0">Control &rarr; Heading &amp; Number of steps</p>
-					<p class="fragment" data-fragment-index="0">Landmark &rarr; Device / Crownstone</p>
-					<br>
-					<p class="fragment" data-fragment-index="1">2D Sensor readings &rarr; (1D) RSSI + initalisation phase</p>
-					<p class="fragment" data-fragment-index="1">Focus on robot's path &rarr; Focus on device locations</p>
-				</section>
+
+
+
+
 
 				<section>
 					<h3>FastSLAM</h3>
