@@ -61,12 +61,16 @@
 					</p>
 				</section>
 
+				<section data-background="img/smarthome.jpg">
+
+				</section>
+
         <section>
 
           <h4>In a smart home / hospital / office, how do we act when..</h4>
 
           <br>
-          <p class="fragment" data-fragment-index="0">We do not know where users are?</p>
+          <p>We do not know where users are?</p>
 
           <br>
 
@@ -75,17 +79,14 @@
         </section>
 
         <section>
-          <h3>User location is not enough</h3>
+          <h3><b>Location is key</b> in smart spaces</h3>
 
           <p>What can we do without locations of devices?</p>
-        </section>
 
-        <section>
-          <h3><b>Location is key</b> in smart spaces</h3>
-          <br>
-          <p>We need <b>both</b> the user and the system</p>
+					<br><br>
+					<p class="fragment" data-fragment-index="0">We need <b>both</b> the user and the system</p>
 
-          <p>But, we can benefit from this combination</p>
+          <p class="fragment" data-fragment-index="0">But, we can benefit from this combination</p>
         </section>
 
         <section>
@@ -134,6 +135,11 @@
           <p><span style="color: #6E6E6E">The result:</span> &nbsp;<i>Room level accuracy</i></p>
         </section>
 
+				<section>
+					<h4>The world of Indoor Localisation</h4>
+					<img src="img/related-work.png">
+				</section>
+
         <section>
 
           <img src="img/Bluetooth_Smart_Logo.svg" style="width: 400px;">
@@ -177,19 +183,14 @@
         <section>
           <h3>Is RSSI usefull?</h3>
 
-          <div class="column-left">
-            <ul>
-              <li>Very noisy</li>
-              <li>Influenced by walls, humans, objects</li>
-            </ul>
-          </div>
-          <div class="column-right">
-            <ul>
-              <li>Avaiable in consumer devices</li>
-              <li>Free input</li>
-              <li>Filtering helps (a bit)</li>
-            </ul>
-          </div>
+					<p>High levels of noise due to:</p>
+          <ul>
+            <li>Walls, humans, objects</li>
+						<li>Multi-path reflections</li>
+						<li>Radio differences</li>
+          </ul>
+
+					<p><br>However, <b>available in almost any consumer device</b> and filtering can help!</p>
         </section>
 
 				<section>
@@ -233,7 +234,7 @@
           <p>RSSI gives us distance, but distance needs a <em>where</em></p>
           <br>
           <div class="fragment" data-fragment-index="1">
-            <p>Users can provide this</p>
+            <p>Users can ground the measurements</p>
             <div class="column-left" style="width: 70%">
               <br>
               <dl>
@@ -258,6 +259,7 @@
 					<br>
 					<img class="fragment" src="img/robottohuman.png">
 				</section>
+
         <section>
           <h3>Replacing robots with humans</h3>
           <p>Robot &rarr; Human</p>
@@ -268,24 +270,21 @@
           <p class="fragment" data-fragment-index="1">2D Sensor readings &rarr; (1D) RSSI + initalisation phase</p>
           <p class="fragment" data-fragment-index="1">Focus on robot's path &rarr; Focus on device locations</p>
         </section>
-        <!--
-
-
-
-
-
-
 				<section>
 					<h3>FastSLAM</h3>
 
 					<p>Online algorithm for solving the SLAM problem</p>
-
+					<p>
+						$$
+						p(x_{0:t}, m_{1:M} | z_{1:t}, u_{1:t})
+						$$
+					</p>
 					<br>
 					<p>Uses <i>Rao-Blackwellized particle filter</i> for estimation</p>
 
 					<p>Each device is represented by an<br> <i>extended Kalman filter</i> (EKF)</p>
-				</section>
 
+				</section>
 				<section>
 					<h3>Independent landmarks</h3>
 					<img src="img/fastslam_network.png" style="height: 400px;">
@@ -294,7 +293,6 @@
 					p(x_{0:t}, m_{1:M} | z_{1:t}, u_{1:t}) = p(x_{0:t} | z_{1:t}, u_{1:t})\; \prod_{i=1}^M p(m_i | x_{0:t}, z_{1:t})
 					$$
 				</section>
-
 				<section>
 					<h3>Particle filters</h3>
 
@@ -458,6 +456,7 @@
 					<p>Signal strength + Motion</p>
 					<p>FastSLAM + Particle Filters</p>
 				</section>
+
 				<section>
 					<section>
 						<div class="column-left" style="width: 60%;">
@@ -519,7 +518,7 @@
 
 						<p>Built for Android &amp; iOS<br><small>(Using Cordova)</small></p>
 
-						<p>DoBeacons from <a href="https://www.dobots.nl">DoBots</a><br><small>(iBeacon compatible, BLE)</small></p>
+						<p>Bluetooth devices from <a href="https://www.dobots.nl">DoBots</a><br><small>(iBeacon compatible, BLE)</small></p>
 
 						<p>Code on GitHub<br><small>	(See: <a href="https://github.com/wouterbulten/slacjs">github.com/wouterbulten/slacjs</a>)</small></p>
 					</div>
@@ -528,7 +527,6 @@
 						<img src="img/apps/devices.png">
 					</div>
 				</section>
-
 				<section>
 					<img src="img/js-implementation.png">
 				</section>
@@ -540,8 +538,7 @@
 				<section data-background="#eeeeee">
 
 					<section data-state="slacjs-demo">
-						<canvas id="slacjs-map" height="300" width="300"></canvas>
-						<canvas id="slacjs-map2" height="300" width="300"></canvas>
+						<canvas id="slacjs-map" height="600" width="600"></canvas>
 						<p>Average error: <span class="landmark-error">&infin;</span> m</p>
 					</section>
 
@@ -552,6 +549,18 @@
 						</video>
 					</section>
 				</section>
+				<section>
+            <div><small>Zero radio noise &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp; Large radio noise</small></div>
+            <video width="450" data-autoplay>
+							<source data-src="videos/noise-effect/no-rssi-noise.mp4" type="video/mp4" />
+						</video>
+            <video width="450" data-autoplay>
+							<source data-src="videos/noise-effect/20-noise.mp4" type="video/mp4" />
+						</video>
+        </section>
+        <!--
+
+
 
         <section>
             <div><small>Zero radio noise &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp; Large radio noise</small></div>
