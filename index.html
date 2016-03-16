@@ -145,14 +145,28 @@
 					<img src="img/related-work.png">
 				</section>
 
+				<section>
+					<h3>Lets talk about robots..</h3>
+					<p><b>Simulteneous Localisation and Mapping (SLAM)</b></p>
+
+					<p>Given robot's <em>controls</em> and <em>sensor readings</em> what is the current estimated location and map of the environment?</p>
+
+					<br>
+					<img class="fragment" src="img/robottohuman.png">
+				</section>
+
         <section>
 
-          <img src="img/Bluetooth_Smart_Logo.svg" style="width: 400px;">
+					<h3>Robot's sensor readings &rarr; ?</h3>
 
-          <p>Devices are often connected wirelessly</p>
-          <p>In our case: Bluetooth Low Energy (BLE)</p>
+					<div class="fragment" data-fragment-index="0">
+						<img src="img/Bluetooth_Smart_Logo.svg" style="width: 400px;">
 
-          <br>
+          	<p>Devices are often connected wirelessly</p>
+          	<p>In our case: Bluetooth Low Energy (BLE)</p>
+
+          	<br>
+					</div>
           <p class="fragment" data-fragment-index="1"><b>&rarr;</b> <em>Received Signal Strength Indicator (RSSI)</em></p>
         </section>
 
@@ -234,9 +248,9 @@
 
         <section>
 
-          <h3>RSSI is not enough..</h3>
+          <h3>Robot's control &rarr; ?</h3>
 
-          <p>RSSI gives us distance, but distance needs a <em>where</em></p>
+          <p class="fragment" data-fragment-index="0">RSSI gives us distance, but distance needs a <em>where</em></p>
           <br>
           <div class="fragment" data-fragment-index="1">
             <p>Users can ground the measurements</p>
@@ -255,39 +269,28 @@
             </div>
           </div>
         </section>
-        <section>
-					<h3>Lets talk about robots..</h3>
-					<p><b>Simulteneous Localisation and Mapping (SLAM)</b></p>
 
-					<p>Given robot's <em>controls</em> and <em>sensor readings</em> what is the current estimated location and map of the environment?</p>
-
-					<br>
-					<img class="fragment" src="img/robottohuman.png">
-				</section>
-
-        <section>
+        <!--<section>
           <h3>Replacing robots with humans</h3>
           <p>Robot &rarr; Human</p>
           <br>
           <p class="fragment" data-fragment-index="0">Control &rarr; Motion estimates</p>
-          <p class="fragment" data-fragment-index="0">Landmark &rarr; Device</p>
-          <br>
-          <p class="fragment" data-fragment-index="1">2D Sensor readings &rarr; (1D) RSSI + initalisation phase</p>
-          <p class="fragment" data-fragment-index="1">Focus on robot's path &rarr; Focus on device locations</p>
-        </section>
+					<p class="fragment" data-fragment-index="0">2D Sensor readings &rarr; (1D) RSSI</p>
+
+        </section>-->
 				<section>
 					<h3>FastSLAM</h3>
 
 					<p>Online algorithm for solving the SLAM problem</p>
+					<br>
+					<blockquote>Given observations and the controls, what is the robot's position on the current map?</blockquote>
+					<br>
 					<p>
 						$$
 						p(x_{0:t}, m_{1:M} | z_{1:t}, u_{1:t})
 						$$
 					</p>
 					<br>
-
-					<blockquote>Given observations and the controls, what is the robot's position on the current map?</blockquote>
-
 
 				</section>
 				<section>
@@ -668,7 +671,7 @@
 				</section>
 				<section>
 					<section>
-						<h3>Localisation error @ Almende</h3>
+						<h3>Localisation error live tests</h3>
 
 						<img src="img/almende_vs_sim.png">
 
@@ -682,30 +685,17 @@
 						<div id="chart-real-world-legend" class="chart-legend"></div>
 					</section>
 
-					<section>
-						<h4>Real world experiments</h4>
-
-						<p>Run 1: 2.41 m (sd 0.38 m)</p>
-						<p>Run 1: 2.30 m (sd 0.18 m)</p>
-						<p>Run 1: 3.01 m (sd 0.51 m)</p>
-					</section>
 				</section>
 				<section>
 					<h4>Difference in performance between simulation and real world</h4>
 
+
+					<p>Walls, obstacles, users themselves</p>
+					<p>Mirroring errors</p>
+					<br>
 					<div class="fragment">
-						<p>Walls, obstacles, users themselves</p>
-						<p>Mirroring errors</p>
 						<p>&rarr; Invest in better motion modelling</p>
 						<p>&rarr; Use more of the environment</p>
-					</div>
-
-					<br>
-					<h4>Beacon performance fluctuates</h4>
-
-					<div class="fragment">
-
-						<p>Dependent on movement and location</p>
 						<p>&rarr; Longer traces</p>
 						<p>&rarr; <i>Map fusing</i></p>
 					</div>
